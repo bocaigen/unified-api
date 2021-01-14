@@ -1,0 +1,26 @@
+server:
+  port: 8080
+  context-path: /girl
+girl:
+    name: 小qing
+    cupSize: A
+    age: 16
+
+eureka:
+  client:
+    service-url:
+#     作用是指定注册中心的地址。
+      defaultZone: http://localhost:8761/eureka
+
+  instance:
+    #是否以 IP 注册到注册中心，Eureka 默认是以 hostname 来注册的。
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}:${spring.application.name}
+#    instance-id: 192.168.0.102:${server.port}
+#    hostname: 192.168.0.102
+    hostname: ${spring.cloud.client.ipAddress}
+
+spring:
+  application:
+#   该服务的名字
+    name: clientGirl
